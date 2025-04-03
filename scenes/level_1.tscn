@@ -1,9 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://oshenhwwqtrs"]
+[gd_scene load_steps=6 format=3 uid="uid://oshenhwwqtrs"]
 
-[ext_resource type="Texture2D" uid="uid://62adr30s2pc" path="res://icon.svg" id="1_amdid"]
+[ext_resource type="PackedScene" uid="uid://ds50mswsgexfd" path="res://scenes/enemy.tscn" id="2_dmiin"]
+[ext_resource type="PackedScene" uid="uid://d26a8p3wtt4h7" path="res://scenes/player.tscn" id="2_x428n"]
+
+[sub_resource type="Animation" id="Animation_oi0v8"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bw1ek"]
+_data = {
+"idle": SubResource("Animation_oi0v8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8oig"]
+size = Vector2(67.625, 1294.27)
 
 [node name="level 1" type="Node2D"]
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(633, 291)
-texture = ExtResource("1_amdid")
+[node name="player" parent="." instance=ExtResource("2_x428n")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bw1ek")
+}
+
+[node name="enemy" parent="." instance=ExtResource("2_dmiin")]
+position = Vector2(545, -262)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(645, -50)
+shape = SubResource("RectangleShape2D_i8oig")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-639, -29)
+shape = SubResource("RectangleShape2D_i8oig")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, -378)
+rotation = 1.56745
+shape = SubResource("RectangleShape2D_i8oig")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-9.70391, 368.097)
+rotation = -1.54961
+shape = SubResource("RectangleShape2D_i8oig")
